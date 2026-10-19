@@ -1,0 +1,511 @@
+
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ismerd meg a GitHub használatát lépésről lépésre!">
+  <title>GitHub Akadémia | Kezdőknek</title>
+
+  <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #9da7b3;
+      --green: #3fb950;
+      --blue: #58a6ff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13, 17, 23, .95);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 21px;
+      font-weight: bold;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      max-width: 1150px;
+      margin: auto;
+      padding: 85px 24px 70px;
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      align-items: center;
+      gap: 45px;
+    }
+
+    .tag {
+      display: inline-block;
+      color: var(--green);
+      border: 1px solid #238636;
+      padding: 5px 12px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(38px, 5vw, 62px);
+      line-height: 1.12;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 17px;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 20px;
+      background: var(--green);
+      color: #08130a;
+      border-radius: 7px;
+      font-weight: bold;
+      transition: .2s;
+    }
+
+    .btn:hover {
+      background: #56d364;
+      transform: translateY(-2px);
+    }
+
+    .hero img {
+      width: 100%;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 70px #0008;
+    }
+
+    section {
+      padding: 75px 8%;
+      scroll-margin-top: 75px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 34px;
+      margin-bottom: 12px;
+    }
+
+    .section-intro {
+      color: var(--muted);
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 42px;
+    }
+
+    .cards {
+      max-width: 1100px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: .25s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: var(--green);
+    }
+
+    .card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-content {
+      padding: 23px;
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .steps {
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 22px;
+      padding: 25px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .number {
+      background: #173d25;
+      color: var(--green);
+      min-width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-size: 19px;
+      font-weight: bold;
+    }
+
+    .step p {
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    code {
+      background: #252b33;
+      padding: 3px 7px;
+      border-radius: 4px;
+      color: #79c0ff;
+    }
+
+    .code-demo {
+      max-width: 850px;
+      margin: 30px auto 0;
+      padding: 25px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #010409;
+      overflow-x: auto;
+    }
+
+    .code-demo pre {
+      color: #a5d6ff;
+      font-size: 14px;
+      line-height: 2;
+    }
+
+    .publish {
+      max-width: 900px;
+      margin: auto;
+      background: linear-gradient(135deg, #14251c, #161b22);
+      border: 1px solid #238636;
+      padding: 38px;
+      border-radius: 15px;
+      text-align: center;
+    }
+
+    .publish p {
+      color: var(--muted);
+      margin: 15px 0 25px;
+    }
+
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 55px;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .card img {
+        height: 230px;
+      }
+
+      .nav-links {
+        gap: 12px;
+        font-size: 12px;
+      }
+
+      nav {
+        padding: 16px 5%;
+      }
+
+      section {
+        padding: 55px 6%;
+      }
+
+      .publish {
+        padding: 25px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .nav-links {
+        gap: 9px;
+      }
+
+      .logo {
+        font-size: 17px;
+      }
+
+      .nav-links a {
+        font-size: 11px;
+      }
+
+      .step {
+        padding: 18px;
+        gap: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <a href="#home" class="logo">GitHub<span>Akadémia</span></a>
+    <div class="nav-links">
+      <a href="#about">Bemutatás</a>
+      <a href="#learn">Útmutató</a>
+      <a href="#publish">Weboldal</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div>
+      <span class="tag">● Kezdőknek készült útmutató</span>
+      <h1>Tanuld meg a <span>GitHub</span> használatát!</h1>
+      <p>
+        Fedezd fel a fejlesztők világát! Ismerd meg a kódok
+        tárolását, a közös munkát és azt, hogyan teheted
+        közzé a saját weboldaladat néhány egyszerű lépésben.
+      </p>
+      <a class="btn" href="#learn">Kezdjük el →</a>
+    </div>
+
+    <img
+      src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1000&q=85"
+      alt="Programozás laptopon, fejlesztői munkakörnyezet"
+    >
+  </header>
+
+  <section id="about">
+    <h2 class="section-title">Mi az a GitHub?</h2>
+    <p class="section-intro">
+      A GitHub egy online platform, ahol projekteket tárolhatsz,
+      követheted a kód változásait, és más fejlesztőkkel dolgozhatsz együtt.
+    </p>
+
+    <div class="cards">
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1556075798-4825dfaaf498?auto=format&fit=crop&w=800&q=80"
+          alt="Digitális projekt és kódkezelés"
+          loading="lazy"
+        >
+        <div class="card-content">
+          <h3>📁 Repository</h3>
+          <p>
+            A repository, vagyis tároló a projekted fájljait,
+            dokumentációját és változástörténetét tartalmazza.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+          alt="Együttműködés és közös munka"
+          loading="lazy"
+        >
+        <div class="card-content">
+          <h3>🤝 Együttműködés</h3>
+          <p>
+            Megoszthatod a munkádat másokkal, módosításokat
+            javasolhatsz, és közösen fejleszthettek projekteket.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <img
+          src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80"
+          alt="Programkód a számítógép képernyőjén"
+          loading="lazy"
+        >
+        <div class="card-content">
+          <h3>💻 Kódkezelés</h3>
+          <p>
+            A Git segítségével rögzítheted a változtatásokat,
+            a GitHubon pedig online kezelheted a projektedet.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="learn">
+    <h2 class="section-title">GitHub lépésről lépésre</h2>
+    <p class="section-intro">
+      Kövesd ezt a négy lépést, és készítsd el az első projektedet!
+    </p>
+
+    <div class="steps">
+      <article class="step">
+        <div class="number">1</div>
+        <div>
+          <h3>Regisztrálj a GitHubra</h3>
+          <p>
+            Nyisd meg a GitHub weboldalát, hozz létre egy
+            fiókot, majd jelentkezz be.
+          </p>
+          <a href="https://github.com/" target="_blank"
+             rel="noopener noreferrer" style="color:var(--blue)">
+            GitHub megnyitása ↗
+          </a>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="number">2</div>
+        <div>
+          <h3>Hozz létre egy repositoryt</h3>
+          <p>
+            Kattints a New repository lehetőségre.
+            Adj neki nevet, például <code>elso-projektem</code>,
+            és hozz létre egy új tárolót.
+          </p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="number">3</div>
+        <div>
+          <h3>Töltsd fel a fájljaidat</h3>
+          <p>
+            Add hozzá a HTML-, CSS- és képfájljaidat.
+            A webes felületen a fájlok feltöltésére is van lehetőség.
+          </p>
+        </div>
+      </article>
+
+      <article class="step">
+        <div class="number">4</div>
+        <div>
+          <h3>Mentsd el a módosításokat</h3>
+          <p>
+            A Commit changes művelettel rögzítheted a változtatásokat.
+            Írhatsz melléjük egy rövid leírást is arról, mit módosítottál.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="code-demo">
+      <p style="color:var(--green);margin-bottom:12px">
+        // Néhány hasznos Git-parancs
+      </p>
+      <pre>
+git init
+git add .
+git commit -m "Elso projekt"
+git branch -M main
+git push
+      </pre>
+      <p style="color:var(--muted);font-size:13px;margin-top:12px">
+        Ezek a parancsok helyi Git-projekt kezelésére szolgálnak.
+        A git push előtt általában a távoli repositoryt is be kell állítani.
+      </p>
+    </div>
+  </section>
+
+  <section id="publish">
+    <div class="publish">
+      <h2>🌐 Tedd közzé a saját weboldaladat!</h2>
+      <p>
+        A GitHub Pages segítségével egy egyszerű, statikus
+        weboldalt online is elérhetővé tehetsz.
+        Hozz létre egy repositoryt, töltsd fel az index.html
+        fájlt, majd a Settings → Pages részen állítsd be a közzétételt.
+      </p>
+      <a
+        class="btn"
+        href="https://docs.github.com/en/pages/getting-started-with-github-pages"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Hivatalos útmutató →
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <p>GitHub Akadémia · Tanulj, alkoss, fejlődj! 🚀</p>
+    <p style="margin-top:5px">Oktatási célú bemutató weboldal.</p>
+  </footer>
+
+</body>
+</html>
